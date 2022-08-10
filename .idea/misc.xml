@@ -6,9 +6,10 @@
         <entry key="..\:/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.18512898330804248" />
         <entry key="..\:/NewsApp/app/src/main/res/layout/fragment_details.xml" value="0.25416666666666665" />
         <entry key="..\:/NewsApp/app/src/main/res/layout/fragment_favourite.xml" value="0.18512898330804248" />
-        <entry key="..\:/NewsApp/app/src/main/res/layout/fragment_main.xml" value="0.18512898330804248" />
+        <entry key="..\:/NewsApp/app/src/main/res/layout/fragment_main.xml" value="0.2" />
         <entry key="..\:/NewsApp/app/src/main/res/layout/fragment_search.xml" value="0.18512898330804248" />
         <entry key="..\:/NewsApp/app/src/main/res/layout/fragment_splash.xml" value="0.18512898330804248" />
+        <entry key="..\:/NewsApp/app/src/main/res/layout/item_article.xml" value="0.2" />
         <entry key="..\:/NewsApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
