@@ -13,7 +13,6 @@ import com.ladoshko.newsapp.databinding.FragmentSearchBinding
 import com.ladoshko.newsapp.ui.adapters.NewsAdapter
 import com.ladoshko.newsapp.utils.Resourse
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -39,18 +38,11 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        var job: Job? = null
-        et_search.addTextChangedListener { text: Editable? ->
-            job?.cancel()
-            job = MainScope().launch {
-                delay(500L)
-                text?.let {
-                    if (it.toString().isNotEmpty()){
-                        searchViewModel.getSearchNews(query = it.toString())
-                    }
-                }
-            }
-        }
+        searchNewsByQuery()
+        searchObserver()
+    }
+
+    private fun searchObserver(){
         searchViewModel.searchMutableLiveData.observe(viewLifecycleOwner){
             when(it){
                 is Resourse.Success -> {
@@ -74,6 +66,21 @@ class SearchFragment : Fragment() {
         search_adapter.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
+        }
+    }
+
+    private fun searchNewsByQuery(){
+        var job: Job? = null
+        et_search.addTextChangedListener { text: Editable? ->
+            job?.cancel()
+            job = MainScope().launch {
+                delay(500L)
+                text?.let {
+                    if (it.toString().isNotEmpty()){
+                        searchViewModel.getSearchNews(query = it.toString())
+                    }
+                }
+            }
         }
     }
 

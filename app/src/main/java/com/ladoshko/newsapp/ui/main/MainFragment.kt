@@ -5,8 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ladoshko.newsapp.R
 import com.ladoshko.newsapp.databinding.FragmentMainBinding
 import com.ladoshko.newsapp.ui.adapters.NewsAdapter
 import com.ladoshko.newsapp.utils.Resourse
@@ -32,6 +35,16 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+
+        newsAdapter.setOnItemClickListener {
+            val bundle = bundleOf("article" to it)
+            view.findNavController().navigate(R.id.action_mainFragment_to_detailsFragment, bundle)
+        }
+
+        mainObserver()
+    }
+
+    private fun mainObserver(){
         mainViewModel.newsLiveData.observe(viewLifecycleOwner){
             when(it){
                 is Resourse.Success -> {
