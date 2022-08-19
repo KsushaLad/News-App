@@ -10,15 +10,19 @@ import android.view.ViewGroup
 import android.webkit.URLUtil
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.ladoshko.newsapp.databinding.FragmentDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     private var _binding : FragmentDetailsBinding? = null
     private val mBinding get() = _binding!!
     private val bundleArgs: DetailsFragmentArgs by navArgs()
+    private val detailsViewModel by viewModels<DetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +56,9 @@ class DetailsFragment : Fragment() {
                     Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                 }
             }
+            mBinding.iconFavourite.setOnClickListener {
+                detailsViewModel.addToFavourite(article)
+            }
         }
     }
-
 }
